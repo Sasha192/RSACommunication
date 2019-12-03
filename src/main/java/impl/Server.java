@@ -9,8 +9,6 @@ public class Server {
 
     }
 
-
-
     static class Entity {
         public BigInteger publicE;
         public BigInteger publicMod;
