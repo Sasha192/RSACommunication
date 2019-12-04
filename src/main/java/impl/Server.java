@@ -7,6 +7,10 @@ import java.math.BigInteger;
 public class Server {
     private Entity entity;
 
+    public Entity getEntity() {
+        return entity;
+    }
+
     public Server(int keySize) {
         if(keySize < 256) {
             keySize = 256;
@@ -42,12 +46,17 @@ public class Server {
                 .get("verified");
     }
 
-    public Object sendKey() {
-        return null;
+    public String[] sendKey(String hexPublicExponent, String hexModulus) {
+        JSONObject jsonObject = ServerService.sendKey(hexPublicExponent, hexModulus);
+        return new String[] {(String) jsonObject.get("key"), (String) jsonObject.get("signature")};
     }
 
-    public Object receiveKey() {
-        return null;
+    public String[] receiveKey(String hexKey,
+                               String hexSignature,
+                               String hexModulus,
+                               String hexPublicExponent) {
+        JSONObject jsonObject = ServerService.receiveKey(hexKey, hexSignature, hexModulus, hexPublicExponent);
+        return new String[] {(String) jsonObject.get("key"), (String) jsonObject.get("verified")};
     }
 
     static class Entity {
@@ -57,6 +66,11 @@ public class Server {
         public Entity(BigInteger publicE, BigInteger publicMod) {
             this.publicE = publicE;
             this.publicMod = publicMod;
+        }
+
+        @Override
+        public String toString() {
+            return "publicExponent : " + publicE + "\n".concat("publicModulus : " + publicMod);
         }
     }
 

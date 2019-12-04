@@ -14,16 +14,14 @@ public class Client {
         customerService.generateKeys();
     }
 
-    public BigInteger send(String msg, ) {
+    public BigInteger send(String msg, Server.Entity entity) {
         BigInteger messageEncrypted = customerService.transformMessage(msg);
-        messageEncrypted = customerService.encrypt(messageEncrypted,
-                ,
-                senderInfo.publicMod);
+        messageEncrypted = customerService.encrypt(messageEncrypted, entity.publicE , entity.publicMod);
         return messageEncrypted;
     }
 
-    public String send(String msg, int base, int senderIndex) {
-        return send(msg, senderIndex).toString(16);
+    public String send(String msg, int base, Server.Entity entity) {
+        return send(msg, entity).toString(base);
     }
 
     public BigInteger getMessage(BigInteger encryptedMessage) {
@@ -46,18 +44,16 @@ public class Client {
         return signMessage(new BigInteger(message, base)).toString(base);
     }
 
-    public boolean verifySignMessage(String message, String signature, int base, int senderIndex) {
+    public boolean verifySignMessage(String message, String signature, int base, Server.Entity entity) {
         return verifySignMessage(new BigInteger(message, base),
-                new BigInteger(signature, base),
-                senderIndex);
+                new BigInteger(signature, base), entity);
     }
 
-    private boolean verifySignMessage(BigInteger message, BigInteger signature, int senderIndex) {
-        Server.Carrier senderInfo = Server.getByIndex(senderIndex);
+    private boolean verifySignMessage(BigInteger message, BigInteger signature, Server.Entity entity) {
         return customerService.verifyMessageSignature(message,
                 signature,
-                senderInfo.publicE,
-                senderInfo.publicMod);
+                entity.publicE,
+                entity.publicMod);
     }
 
     public String getPublicE(int base) {
@@ -74,10 +70,6 @@ public class Client {
 
     public BigInteger getMod() {
         return customerService.getMod();
-    }
-
-    public int getServerIndex() {
-        return serverIndex;
     }
 
     private static class CustomerServiceImpl extends RivestShamirAdlemanService {
