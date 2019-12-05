@@ -1,8 +1,7 @@
 package impl;
 
-import org.json.simple.JSONObject;
-
 import java.io.IOException;
+import org.json.simple.JSONObject;
 
 public class ServerService {
 
@@ -22,11 +21,13 @@ public class ServerService {
         return doGet(request);
     }
 
-    public static JSONObject encrypt(String hexMessage, String hexPublicExponent, String hexModulus) {
+    public static JSONObject encrypt(String hexMessage,
+                                     String hexPublicExponent,
+                                     String hexModulus) {
         String request = "http://asymcryptwebservice.appspot.com/rsa/encrypt?"
                 .concat("modulus=" + hexModulus)
                 .concat("&publicExponent=" + hexPublicExponent)
-                .concat("&message=" + hexMessage +"&type=BYTES");
+                .concat("&message=" + hexMessage + "&type=BYTES");
         return doGet(request);
     }
 

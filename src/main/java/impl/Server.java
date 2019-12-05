@@ -1,8 +1,7 @@
 package impl;
 
-import org.json.simple.JSONObject;
-
 import java.math.BigInteger;
+import org.json.simple.JSONObject;
 
 public class Server {
     private Entity entity;
@@ -12,7 +11,7 @@ public class Server {
     }
 
     public Server(int keySize) {
-        if(keySize < 256) {
+        if (keySize < 256) {
             keySize = 256;
         }
         JSONObject jsonObject = ServerService.getServerKey(keySize);
@@ -38,9 +37,9 @@ public class Server {
     }
 
     public Boolean verifySignMessage(String hexMessage,
-                                    String hexSignature,
-                                    String hexPublicExponent,
-                                    String hexModulus) {
+                                     String hexSignature,
+                                     String hexPublicExponent,
+                                     String hexModulus) {
         return (Boolean) ServerService
                 .verify(hexMessage, hexSignature, hexPublicExponent, hexModulus)
                 .get("verified");
@@ -48,15 +47,18 @@ public class Server {
 
     public String[] sendKey(String hexPublicExponent, String hexModulus) {
         JSONObject jsonObject = ServerService.sendKey(hexPublicExponent, hexModulus);
-        return new String[] {(String) jsonObject.get("key"), (String) jsonObject.get("signature")};
+        return new String[]{(String) jsonObject.get("key"), (String) jsonObject.get("signature")};
     }
 
     public String[] receiveKey(String hexKey,
                                String hexSignature,
                                String hexModulus,
                                String hexPublicExponent) {
-        JSONObject jsonObject = ServerService.receiveKey(hexKey, hexSignature, hexModulus, hexPublicExponent);
-        return new String[] {(String) jsonObject.get("key"), (String) jsonObject.get("verified")};
+        JSONObject jsonObject = ServerService.receiveKey(hexKey,
+                hexSignature,
+                hexModulus,
+                hexPublicExponent);
+        return new String[]{(String) jsonObject.get("key"), (String) jsonObject.get("verified")};
     }
 
     public static class Entity {

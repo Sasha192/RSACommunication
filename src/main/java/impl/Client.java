@@ -1,6 +1,7 @@
 package impl;
 
 import algorithms.Euclid;
+
 import java.math.BigInteger;
 
 import keygeneration.FindPrime;
@@ -15,7 +16,7 @@ public class Client {
     }
 
     public BigInteger encrypt(BigInteger msg, Server.Entity entity) {
-        return customerService.encrypt(msg, entity.publicE , entity.publicMod);
+        return customerService.encrypt(msg, entity.publicE, entity.publicMod);
     }
 
     public String encrypt(String msg, int base, Server.Entity entity) {
@@ -42,12 +43,17 @@ public class Client {
         return signMessage(new BigInteger(message, base)).toString(base);
     }
 
-    public boolean verifySignMessage(String message, String signature, int base, Server.Entity entity) {
+    public boolean verifySignMessage(String message,
+                                     String signature,
+                                     int base,
+                                     Server.Entity entity) {
         return verifySignMessage(new BigInteger(message, base),
                 new BigInteger(signature, base), entity);
     }
 
-    private boolean verifySignMessage(BigInteger message, BigInteger signature, Server.Entity entity) {
+    private boolean verifySignMessage(BigInteger message,
+                                      BigInteger signature,
+                                      Server.Entity entity) {
         return customerService.verifyMessageSignature(message,
                 signature,
                 entity.publicE,
@@ -58,11 +64,11 @@ public class Client {
         return null;
     }
 
-    public String sendKey() {
+    public String receiveKey(int base) {
         return null;
     }
 
-    public String receiveKey(int base) {
+    public String sendKey() {
         return null;
     }
 
