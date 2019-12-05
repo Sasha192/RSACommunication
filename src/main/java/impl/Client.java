@@ -54,6 +54,22 @@ public class Client {
                 entity.publicMod);
     }
 
+    public String receiveKey() {
+        return null;
+    }
+
+    public String sendKey() {
+        return null;
+    }
+
+    public String receiveKey(int base) {
+        return null;
+    }
+
+    public String sendKey(int base) {
+        return null;
+    }
+
     public String getPublicE(int base) {
         return getPublicE().toString(base);
     }
