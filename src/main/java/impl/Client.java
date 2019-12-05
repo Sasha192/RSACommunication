@@ -14,22 +14,20 @@ public class Client {
         customerService.generateKeys();
     }
 
-    public BigInteger send(String msg, Server.Entity entity) {
-        BigInteger messageEncrypted = customerService.transformMessage(msg);
-        messageEncrypted = customerService.encrypt(messageEncrypted, entity.publicE , entity.publicMod);
-        return messageEncrypted;
+    public BigInteger encrypt(BigInteger msg, Server.Entity entity) {
+        return customerService.encrypt(msg, entity.publicE , entity.publicMod);
     }
 
-    public String send(String msg, int base, Server.Entity entity) {
-        return send(msg, entity).toString(base);
+    public String encrypt(String msg, int base, Server.Entity entity) {
+        return encrypt(new BigInteger(msg, base), entity).toString(base);
     }
 
-    public BigInteger getMessage(BigInteger encryptedMessage) {
+    public BigInteger decrypt(BigInteger encryptedMessage) {
         return customerService.decrypt(encryptedMessage);
     }
 
-    public String getMessage(String encryptedMessage, int base) {
-        return getMessage(new BigInteger(encryptedMessage, base)).toString(base);
+    public String decrypt(String encryptedMessage, int base) {
+        return decrypt(new BigInteger(encryptedMessage, base)).toString(base);
     }
 
     public BigInteger signMessage(String message) {

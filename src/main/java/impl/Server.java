@@ -22,12 +22,12 @@ public class Server {
         );
     }
 
-    public String send(String hexPublicExponent, String hexModulus, String hexMessage) {
+    public String encrypt(String hexPublicExponent, String hexModulus, String hexMessage) {
         return (String) ServerService.encrypt(hexMessage, hexPublicExponent, hexModulus)
                 .get("cipherText");
     }
 
-    public String getMessage(String hexCipherText) {
+    public String decrypt(String hexCipherText) {
         return (String) ServerService.decrypt(hexCipherText)
                 .get("message");
     }
@@ -37,11 +37,11 @@ public class Server {
                 .get("signature");
     }
 
-    public String verifySignMessage(String hexMessage,
+    public Boolean verifySignMessage(String hexMessage,
                                     String hexSignature,
                                     String hexPublicExponent,
                                     String hexModulus) {
-        return (String) ServerService
+        return (Boolean) ServerService
                 .verify(hexMessage, hexSignature, hexPublicExponent, hexModulus)
                 .get("verified");
     }
@@ -59,7 +59,7 @@ public class Server {
         return new String[] {(String) jsonObject.get("key"), (String) jsonObject.get("verified")};
     }
 
-    static class Entity {
+    public static class Entity {
         public BigInteger publicE;
         public BigInteger publicMod;
 

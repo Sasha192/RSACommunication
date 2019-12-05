@@ -32,7 +32,7 @@ public class ServerService {
 
     public static JSONObject decrypt(String hexCipherText) {
         String request = "http://asymcryptwebservice.appspot.com/rsa/decrypt?"
-                .concat("message=" + hexCipherText)
+                .concat("cipherText=" + hexCipherText)
                 .concat("&expectedType=BYTES");
         return doGet(request);
     }
