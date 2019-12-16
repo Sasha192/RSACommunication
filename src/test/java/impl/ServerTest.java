@@ -10,8 +10,8 @@ import java.math.BigInteger;
 public class ServerTest {
     private static Server server;
     private static Client client;
-    private static final int KEY_SIZE;
     private static Server.Entity serverEntity;
+    private static final int KEY_SIZE;
     private static final int NUMBER_OF_EACH_TEST;
     private static final int BASE;
 
@@ -29,7 +29,7 @@ public class ServerTest {
     }
 
     static {
-        KEY_SIZE = 256;
+        KEY_SIZE = 512;
         NUMBER_OF_EACH_TEST = 10;
         BASE = 16;
     }
@@ -38,7 +38,7 @@ public class ServerTest {
     public static void setup() {
         server = new Server(KEY_SIZE);
         client = new Client();
-        serverEntity = server.getEntity();
+        serverEntity = server.entity;
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ServerTest {
     }
 
     @Test
-    public void signMessage() {
+    public void signMessageTest() {
         int n = NUMBER_OF_EACH_TEST;
         while (n-- > 0) {
             String hexMessage = GenerateRandom.generate(BigInteger.ZERO, serverEntity.publicMod).toString(BASE);
@@ -76,7 +76,7 @@ public class ServerTest {
     }
 
     @Test
-    public void verifySignMessage() {
+    public void verifySignMessageTest() {
         int n = NUMBER_OF_EACH_TEST;
         while (n-- > 0) {
             String hexMessage = GenerateRandom.generate(BigInteger.ZERO, serverEntity.publicMod).toString(BASE);
@@ -89,12 +89,21 @@ public class ServerTest {
     }
 
     @Test
-    public void sendKey() {
-    
+    public void sendKeyTest() {
+        int n = NUMBER_OF_EACH_TEST;
+        while (n-- > 0) {
+            KeyEntity keyEntity = client.sendKey(BASE, serverEntity);
+            Assert.assertTrue(server.receiveKey(keyEntity.hexKey, keyEntity.hexSign,
+                    client.getMod(BASE), client.getPublicE(BASE)));
+        }
     }
 
     @Test
-    public void receiveKey() {
-
+    public void receiveKeyTest() {
+        int n = NUMBER_OF_EACH_TEST;
+        while (n-- > 0) {
+            KeyEntity keyEntity = server.sendKey(client.getPublicE(BASE), client.getMod(BASE));
+            Assert.assertTrue(client.receiveKey(serverEntity, keyEntity, BASE));
+        }
     }
 }

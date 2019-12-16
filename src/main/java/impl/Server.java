@@ -4,21 +4,12 @@ import java.math.BigInteger;
 import org.json.simple.JSONObject;
 
 public class Server {
-    private Entity entity;
+    private static int BASE = 16;
 
-    public Entity getEntity() {
-        return entity;
-    }
+    public Entity entity;
 
     public Server(int keySize) {
-        if (keySize < 256) {
-            keySize = 256;
-        }
-        JSONObject jsonObject = ServerService.getServerKey(keySize);
-        entity = new Entity(
-                new BigInteger((String) jsonObject.get("publicExponent"), 16),
-                new BigInteger((String) jsonObject.get("modulus"), 16)
-        );
+        getServerKeys(this, keySize);
     }
 
     public String encrypt(String hexPublicExponent, String hexModulus, String hexMessage) {
@@ -45,12 +36,13 @@ public class Server {
                 .get("verified");
     }
 
-    public String[] sendKey(String hexPublicExponent, String hexModulus) {
+    public KeyEntity sendKey(String hexPublicExponent, String hexModulus) {
         JSONObject jsonObject = ServerService.sendKey(hexPublicExponent, hexModulus);
-        return new String[]{(String) jsonObject.get("key"), (String) jsonObject.get("signature")};
+        return new KeyEntity((String) jsonObject.get("key"),
+                (String) jsonObject.get("signature"), BASE);
     }
 
-    public String[] receiveKey(String hexKey,
+    public boolean receiveKey(String hexKey,
                                String hexSignature,
                                String hexModulus,
                                String hexPublicExponent) {
@@ -58,7 +50,7 @@ public class Server {
                 hexSignature,
                 hexModulus,
                 hexPublicExponent);
-        return new String[]{(String) jsonObject.get("key"), (String) jsonObject.get("verified")};
+        return (boolean) jsonObject.get("verified");
     }
 
     public static class Entity {
@@ -76,4 +68,15 @@ public class Server {
         }
     }
 
+    public static Server getServerKeys(Server server, int keySize) {
+        if (keySize < 256) {
+            keySize = 256;
+        }
+        JSONObject jsonObject = ServerService.getServerKey(keySize);
+        server.entity = new Entity(
+                new BigInteger((String) jsonObject.get("publicExponent"), BASE),
+                new BigInteger((String) jsonObject.get("modulus"), BASE)
+        );
+        return server;
+    }
 }

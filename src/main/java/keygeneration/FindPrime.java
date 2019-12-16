@@ -2,7 +2,6 @@ package keygeneration;
 
 import algorithms.GenerateRandom;
 import algorithms.PrimarilyTest;
-
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
