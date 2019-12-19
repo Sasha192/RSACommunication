@@ -8,12 +8,13 @@
 # <a name="purpose"></a>Project purpose
 
 Let : 
-* public Exponent ( publicE ) = ![equation](https://latex.codecogs.com/gif.download?%5C%20e%20%3A%20gcd%28e%2C%5Cphi%20%28n%29%29)
-* private D key ( privateD ) = ![equation](https://latex.codecogs.com/gif.download?%5C%20d%20%3A%20e%20*%20d%20%5Cequiv%201%20modn)
-* public Modulus ( publicMod ) = ![equation](https://latex.codecogs.com/gif.download?%5C%20n%20%3A%20n%20%3D%20p%20*%20q)
+* public Exponent ( publicE ) = <img src = "https://render.githubusercontent.com/render/math?math=%5C%20e%20%5C%20%3A%20%5C%20gcd(e%2C%20%5Cphi(n))%20%5Cequiv%201%20%5C%20mod%20%5C%20n">
+* private D key ( privateD ) = <img src = "https://render.githubusercontent.com/render/math?math=%5C%20d%20%3A%20%5C%20d%20*%20e%20%5Cequiv%201%20%5C%20mod%20%5C%20n%20">
+* public Modulus ( publicMod ) = <img src = "https://render.githubusercontent.com/render/math?math=%5C%20n%20%5C%20%3A%20%5C%20n%20%3D%20p%20*%20q">
 , that p and q - big prime numbers with more than 256 bits.
-* ![equation](https://latex.codecogs.com/gif.download?%5C%20RSA%20%3A%20M%20%5Crightarrow%20C) , where M - all messages, C - all cipher texts, RSA - function.
-* ![equation](https://latex.codecogs.com/gif.download?%5C%20euler%20%5C%20function%20%5C%20%5Cphi%20%28n%29%20%3A%20%5Cmathbb%7BN%7D%20%5Crightarrow%20%5Cmathbb%7BN%7D)
+* <img src = "https://render.githubusercontent.com/render/math?math=%5C%20RSA%20%3A%20M%20%5Crightarrow%20C"> , where M - all messages, C - all cipher texts, RSA - function.
+* <img src="https://render.githubusercontent.com/render/math?math=%5C%20euler%20%5C%20function%20%5C%20%5Cphi%20(n)%20%3A%20%5Cmathbb%7BN%7D%20%5Crightarrow%20%5Cmathbb%7BN%7D)">
+
 
 
 Understanding specificity of RSA encryption : 
@@ -24,13 +25,10 @@ CustomerServiceImpl is black box for customer :
 customer only receive cipher text on given keys,
 text ( that want to encrypt ) and get decrypted text on given cipher text.
 * Generating prime public Exponent with more  
-or equals than 10 bits, that  ![equation](https://latex.codecogs.com/gif.download?%5Cgcd%28e%2C%5Cphi%20%28n%29%29%20%3D%201).
- We used so because of Coppersmith's attack on low public Exponent. Also it not recommended to generate large publicE or near ![equation](https://latex.codecogs.com/gif.download?%5C%20%5Cphi%20%28n%29%20/2) 
-. For example, assume e = ![equation](https://latex.codecogs.com/gif.download?%5C%20%5Cphi%20%28n%29%20/%202%20+%201), hence for all M satisfy :
- ![equation](https://latex.codecogs.com/gif.download?%5C%20M%5E%7Be%7D%20%5C%20%5Cequiv%20%5C%20M%5E%7B%5Cphi%20%28n%29%20/%202%20+%201%7D%20%5C%20%5Cequiv%20%5C%20M%5E%7B%5Cphi%28n%29/2%7D%20*%20M%20%5C%20%5Cequiv%20%5C%20M%20%5Cmod%20n)
-
-
-<img src="https://render.githubusercontent.com/render/math?math=%5C%20euler%20%5C%20function%20%5C%20%5Cphi%20(n)%20%3A%20%5Cmathbb%7BN%7D%20%5Crightarrow%20%5Cmathbb%7BN%7D)">
+or equals than 10 bits.
+ We used so because of Coppersmith's attack on low public Exponent. Also it not recommended to generate large publicE or near <img src="https://render.githubusercontent.com/render/math?math=%5Cphi(n)%20%2F2%20">
+. For example, assume htth?math=e%20%3D%20%5Cphi(n)%20%2F%202<img src ="https://render.githubusercontent.com/render/math?math=e%20%3D%20%5Cphi(n)%20%2F%202%20%2B%201">, hence for every M satisfy :
+<img src="https://render.githubusercontent.com/render/math?math=M%5E%7Be%7D%20%5Cequiv%20M%5E%7B%5Cphi(n)%2F2%20%2B%201%7D%20%5Cequiv%20M%5E%7B%5Cphi(n)%2F2%7D*M%20%5Cequiv%20M%20%5C%20mod%20%5C%20n">
 
 * Correctness of implementation was tested with remote server ( see class Server, ServerService )
 
@@ -38,7 +36,7 @@ or equals than 10 bits, that  ![equation](https://latex.codecogs.com/gif.downloa
 * Java 8
 * Maven 4.0.0
 * JUnit 4
-* JSON
+* JSON-Simple 1.1
 
 
 
