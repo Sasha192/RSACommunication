@@ -1,7 +1,7 @@
 # RSA Communication
 
 * [Project purpose](#purpose)
-* [Project structure](#structure)
+* [Teck stack](#structure)
 * [Authors](#authors)
 * [Bibliography](#bibliography)
 
@@ -14,7 +14,6 @@ Let :
 , that p and q - big prime numbers with more than 256 bits.
 * <img src = "https://render.githubusercontent.com/render/math?math=%5C%20RSA%20%3A%20M%20%5Crightarrow%20C"> , where M - all messages, C - all cipher texts, RSA - function.
 * <img src="https://render.githubusercontent.com/render/math?math=%5C%20euler%20%5C%20function%20%5C%20%5Cphi%20(n)%20%3A%20%5Cmathbb%7BN%7D%20%5Crightarrow%20%5Cmathbb%7BN%7D)">
-
 
 
 Understanding specificity of RSA encryption : 
