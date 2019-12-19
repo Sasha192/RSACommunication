@@ -30,7 +30,7 @@ or equals than 10 bits, that  ![equation](https://latex.codecogs.com/gif.downloa
  ![equation](https://latex.codecogs.com/gif.download?%5C%20M%5E%7Be%7D%20%5C%20%5Cequiv%20%5C%20M%5E%7B%5Cphi%20%28n%29%20/%202%20+%201%7D%20%5C%20%5Cequiv%20%5C%20M%5E%7B%5Cphi%28n%29/2%7D%20*%20M%20%5C%20%5Cequiv%20%5C%20M%20%5Cmod%20n)
 
 
-<img src="https://alexanderrodin.com/github-latex-markdown/?math=%5C%20euler%20%5C%20function%20%5C%20%5Cphi%20(n)%20%3A%20%5Cmathbb%7BN%7D%20%5Crightarrow%20%5Cmathbb%7BN%7D">
+<img src="https://render.githubusercontent.com/render/math?math=%5C%20euler%20%5C%20function%20%5C%20%5Cphi%20(n)%20%3A%20%5Cmathbb%7BN%7D%20%5Crightarrow%20%5Cmathbb%7BN%7D)">
 
 * Correctness of implementation was tested with remote server ( see class Server, ServerService )
 
