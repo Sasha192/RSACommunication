@@ -28,7 +28,7 @@ or equals than 10 bits.
  We used so because of Coppersmith's attack on low public Exponent. Also it not recommended to generate large publicE or near <img src="https://render.githubusercontent.com/render/math?math=%5Cphi(n)%20%2F2%20">
 . For example, assume <img src ="https://render.githubusercontent.com/render/math?math=e%20%3D%20%5Cphi(n)%20%2F%202%20%2B%201">, hence for every M satisfy :
 <img src="https://render.githubusercontent.com/render/math?math=M%5E%7Be%7D%20%5Cequiv%20M%5E%7B%5Cphi(n)%2F2%20%2B%201%7D%20%5Cequiv%20M%5E%7B%5Cphi(n)%2F2%7D*M%20%5Cequiv%20M%20%5C%20mod%20%5C%20n">
-
+* To generate prime numbers i use BlumBlumShub ( BBS ) Number Generator. Before this i check BBS for equal probability of bytes, bytes independence, bytes homogeneity using Pearson's chi-squared test
 * Correctness of implementation was tested with remote server ( see class Server, ServerService )
 
 # <a name="structure"></a>Tech stack
